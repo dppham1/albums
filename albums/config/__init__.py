@@ -1,4 +1,3 @@
 from albums.config.config import (
-    DB_URL,
-    JWT_SECRET_KEY
+    Config, TestConfig, JWT_SECRET_KEY
 )

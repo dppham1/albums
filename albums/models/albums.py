@@ -40,13 +40,13 @@ class PriceField(fields.Field):
     Custom Validator for "price" field of Albums object
     """
     def _deserialize(self, value, attr, data, **kwargs):
-        if isinstance(value.get('amount'), int) or isinstance(value.get('amount'), float):
+        if isinstance(value.get('amount'), int) or isinstance(value.get('amount'), float) and isinstance(value.get('currency'), str):
             return value
         else:
-            raise ValidationError("Price object's 'amount' field should be an int or double")
+            raise ValidationError("Price object's 'amount' field should be an int or double and 'currency' field should be a str")
 
 class AlbumSchema(Schema):  
-    id = fields.Str(dump_only=True)
+    id = fields.Int(dump_only=True)
     name = fields.Str(required=True, allow_none=False)
     images = fields.List(fields.String(), required=True, allow_none=False)
     song_count = fields.Int(required=True, allow_none=False)

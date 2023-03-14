@@ -1,3 +1,5 @@
+import os
+
 from flask import (
     Flask,
     jsonify,
@@ -5,17 +7,19 @@ from flask import (
 )
 from flask_sqlalchemy import SQLAlchemy
 
-from albums.config import DB_URL, JWT_SECRET_KEY
+from albums.config import Config, TestConfig
+from .routes import albums, users
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY'] = JWT_SECRET_KEY
+if os.environ.get("ENV") == "test":
+    app.config.from_object(TestConfig)
+else:
+    app.config.from_object(Config)
 
-db = SQLAlchemy(app)
+db = SQLAlchemy(app=app)
 
-from .resources import albums, users
+
 app.register_blueprint(albums.blueprint)
 app.register_blueprint(users.blueprint)
 

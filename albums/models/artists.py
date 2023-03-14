@@ -4,6 +4,7 @@ from marshmallow import Schema, fields
 
 from albums import db
 
+
 @dataclass
 class Artists(db.Model):
     id: int

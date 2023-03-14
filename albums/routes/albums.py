@@ -17,6 +17,7 @@ blueprint = Blueprint('albums', __name__, url_prefix='/api/albums')
 @blueprint.route('/', methods=['GET'])
 def get_albums():
     if request.method == 'GET':
+
         # filter
         filters = {}
         filter_params = {'name', 'artist_id', 'genre_id'}
@@ -38,11 +39,8 @@ def get_albums():
             sort_column = sort_column.asc()
         
         # find records
-        query = Albums.query.filter_by(**filters).order_by(sort_column)
-        albums = query.all()
-        
-        album_schema = AlbumSchema(many=True)
-        response_data = album_schema.dump(albums)
+        albums = Albums.query.filter_by(**filters).order_by(sort_column).all()        
+        response_data = AlbumSchema(many=True).dump(albums)
         
         return jsonify(response_data), 200
 
@@ -90,6 +88,7 @@ def create_album():
             return jsonify({'error': str(e)}), 400
 
         response_data = album_schema.dump(new_album)
+        
         return jsonify(response_data)
 
 @blueprint.route('/<int:album_id>', methods=['DELETE'])

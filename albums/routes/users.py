@@ -12,10 +12,11 @@ from flask import (
 from marshmallow import ValidationError
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from albums import db, app
+from albums import db
+from albums.config import JWT_SECRET_KEY
 from albums.models.users import Users, UserSchema
 
-blueprint = Blueprint('users', __name__, url_prefix='/api/user')
+blueprint = Blueprint('users', __name__, url_prefix='/api/users')
 
 @blueprint.route('/register', methods=['POST'])
 def register():
@@ -52,11 +53,11 @@ def login():
     if not auth or not auth.username or not auth.password: 
         return jsonify('A Username and Password is required to login'), 401
 
-    user = Users.query.filter_by(username=auth.username).first()
+    user = Users.query.filter_by(username=auth.username.lower()).first()
 
     if check_password_hash(user.password, auth.password):
         payload = {'id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=5)}
-        token = jwt.encode(payload, app.config['JWT_SECRET_KEY'], algorithm="HS256")
+        token = jwt.encode(payload, JWT_SECRET_KEY, algorithm="HS256")
         return jsonify({'Token': token}), 200
     
     return jsonify('Could not authenticate the User with the given credentials'), 401
