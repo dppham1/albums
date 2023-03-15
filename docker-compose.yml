@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: "albums-postgres"
+    image: postgres:14.7
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dev
+    volumes:
+      - ./db/data.sql:/docker-entrypoint-initdb.d/data.sql
+    ports:
+      - "5432:5432"
+
+  app:
+    container_name: "albums"
+    image: albums
+    build: .
+    restart: always
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/dev
+      POSTGRES_URL: db:5432
+      POSTGRES_USER: postgres
+      POSTGRES_PW: password
+      POSTGRES_DB: dev
+    ports:
+      - "80:80"
+    depends_on:
+      - db

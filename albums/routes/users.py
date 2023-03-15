@@ -54,9 +54,11 @@ def login():
         return jsonify('A Username and Password is required to login'), 401
 
     user = Users.query.filter_by(username=auth.username.lower()).first()
+    if not user:
+        return jsonify('User does not exist'), 400
 
     if check_password_hash(user.password, auth.password):
-        payload = {'id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=5)}
+        payload = {'id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=120)}
         token = jwt.encode(payload, JWT_SECRET_KEY, algorithm="HS256")
         return jsonify({'Token': token}), 200
     

@@ -1,0 +1,277 @@
+{
+	"info": {
+		"_postman_id": "981d60fd-954d-46f8-a8c1-aade7c49c3f9",
+		"name": "Weecare - Albums",
+		"description": "<div>The Albums API is a simple, authentication-protected CRUD API that will allow you to Get, Create, Update, and Delete Albums.</div>\n\n<div>Note: an Album can only be created for a Genre ID and Artist ID that already exists in the database. Because the API for Genres/Artists does not exist, try creating an Album for an Artist/Genre that already exists. Or, alternatively, bypass the API layer and insert records into the Genres and Artists table directly, then create the Album. 😊</div>",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users - Register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"test_user\",\n    \"password\": \"test_password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/users/register",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				},
+				"description": "<h2>User Registration</h2>\n\n<b>Some endpoints (Create Album, Update Album, Delete Album) require a Token before you can use them. To get this token, register for a User and then hit the login endpoint.</b>"
+			},
+			"response": []
+		},
+		{
+			"name": "Users - Login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test_password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "test_user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/users/login",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				},
+				"description": "<h2>User Login</h2>\n\n<i>Returns a Token that you can use for subsequent calls to Create, Update, Delete Albums</i>"
+			},
+			"response": []
+		},
+		{
+			"name": "Albums - Get Albums",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/albums/?sort_by=album_id&order_by=asc",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"albums",
+						""
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "album_id"
+						},
+						{
+							"key": "order_by",
+							"value": "asc"
+						}
+					]
+				},
+				"description": "<h2>Gets all albums</h2>\n\n<i>Note: Filtering, Sorting, and Ordering are all supported. Just add the sort_by and order_by query params!</i>"
+			},
+			"response": []
+		},
+		{
+			"name": "Albums - Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/health",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"health"
+					]
+				},
+				"description": "<h2>Health Check endpoint for the Albums API.</h2>"
+			},
+			"response": []
+		},
+		{
+			"name": "Albums - Create Album",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjc4ODU3MDA1fQ.iFvwGGg79rjFqUlkIvMDEwwXVxm67uSaq-62hCK6r1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"David's Album\",\n    \"images\": [\n        \"https://images.saymedia-content.com/.image/t_share/MTc0NDkxNzgyMzYzNDg5NjQw/vinyl-to-paper-how-to-write-an-album-review.jpg\"\n    ],\n    \"song_count\": 10,\n    \"price\": {\n        \"amount\": 10.99,\n        \"currency\": \"USD\"\n    },\n    \"label_rights\": \"David Music Entertainment\",\n    \"title\": \"Album Title\",\n    \"url\": \"https://music.apple.com/us/album/red-taylors-version-a-message-from-taylor/1590368448\",\n    \"artist_id\": 159260351,\n    \"genre_id\": 14,\n    \"release_date\": \"2023-02-14 00:00:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/albums/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"albums",
+						""
+					]
+				},
+				"description": "<h2>Creates an Album.</h2>\n\n**Endpoint authentication exists for this endpoint, which means you will require a valid Token to call this endpoint.**\n\n<i>Note: an Album can only be created for a Genre ID and Artist ID that already exists in the database. Because the API for Genres/Artists does not yet exist, try creating an Album for an Artist/Genre that already exists. Or, alternatively, bypass the API layer and insert records into the Genres and Artists table directly, then create the Album. </i>\n\n<h2>Request Body Params</h2>\n<div>- <b>name (str)</b>: Album name</div>\n<div>- <b>images (List[str])</b>: Album's images</div>\n<div>- <b>song_count (int)</b>: The number of songs in the Album</div>\n<div>- <b>price (dict)</b>: A dict consisting of two keys, 'price' and 'amount' that indicates the price of the album and in which currency</div>\n<div>- <b>label_rights (str)</b>: The Record Label </div>\n<div>- <b>title (str)</b>: The Album's Title</div>\n<div>- <b>url (str)</b>: The URL for where the Album exists on Apple</div>\n<div>- <b>artist_id (int)</b>: The ID of the Album's Artist </div>\n<div>- <b>genre_id (int)</b>: The ID of the Album's genre</div>\n<div> - <b>release_date (str)</b>: The Album's release date </div>"
+			},
+			"response": []
+		},
+		{
+			"name": "Albums - Update Album",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjc4ODU3MDA1fQ.iFvwGGg79rjFqUlkIvMDEwwXVxm67uSaq-62hCK6r1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Test Album2\",\n    \"images\": [\n        \"https://images.saymedia-content.com/.image/t_share/MTc0NDkxNzgyMzYzNDg5NjQw/vinyl-to-paper-how-to-write-an-album-review.jpg\"\n    ],\n    \"song_count\": 5,\n    \"price\": {\n        \"amount\": 5.99,\n        \"currency\": \"USD\"\n    },\n    \"label_rights\": \"Sony Music Entertainment\",\n    \"title\": \"Album Title\",\n    \"url\": \"https://music.apple.com/us/album/red-taylors-version-a-message-from-taylor/1590368448\",\n    \"artist_id\": 159260351,\n    \"genre_id\": 14,\n    \"release_date\": \"2023-02-14 00:00:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/albums/1",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"albums",
+						"1"
+					]
+				},
+				"description": "<h2>Updates an Album</h2>\n\n**Endpoint authentication exists for this endpoint, which means you will require a valid Token to call this endpoint.**\n\n<h2>Request Body Params</h2>\n<div>- <b>name (str)</b>: Album name</div>\n<div>- <b>images (List[str])</b>: Album's images</div>\n<div>- <b>song_count (int)</b>: The number of songs in the Album</div>\n<div>- <b>price (dict)</b>: A dict consisting of two keys, 'price' and 'amount' that indicates the price of the album and in which currency</div>\n<div>- <b>label_rights (str)</b>: The Record Label </div>\n<div>- <b>title (str)</b>: The Album's Title</div>\n<div>- <b>url (str)</b>: The URL for where the Album exists on Apple</div>\n<div>- <b>artist_id (int)</b>: The ID of the Album's Artist </div>\n<div>- <b>genre_id (int)</b>: The ID of the Album's genre</div>\n<div> - <b>release_date (str)</b>: The Album's release date </div>"
+			},
+			"response": []
+		},
+		{
+			"name": "Albums - Delete Album",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjc4ODU3MDA1fQ.iFvwGGg79rjFqUlkIvMDEwwXVxm67uSaq-62hCK6r1Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/albums/1",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"albums",
+						"1"
+					]
+				},
+				"description": "<h2>Deletes an Album</h2>\n\n**Endpoint authentication exists for this endpoint, which means you will require a valid Token to call this endpoint.**"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "127.0.0.1"
+		},
+		{
+			"key": "port",
+			"value": "80"
+		}
+	]
+}

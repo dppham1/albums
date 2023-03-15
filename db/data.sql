@@ -10,7 +10,7 @@ CREATE TABLE users (
 );
 CREATE INDEX index_username ON users (username);
 
-INSERT INTO users(id, username, password, created_at, updated_at) VALUES (1,'admin','password', NOW(), NOW())
+INSERT INTO users(id, username, password, created_at, updated_at) VALUES (1,'admin','password', NOW(), NOW());
 
 /* Genres */
 CREATE TABLE genres (

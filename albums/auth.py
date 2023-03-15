@@ -11,7 +11,10 @@ def token_required(f):
     def decorator(*args, **kwargs):
         token = None
         if 'Authorization' in request.headers:
-            token = request.headers["Authorization"].split("Bearer ")[1].strip()
+            try:
+                token = request.headers["Authorization"].split("Bearer ")[1].strip()
+            except IndexError:
+                return jsonify('A valid Token is required'), 400
         if not token:
             return jsonify('A valid Token is required'), 400
         

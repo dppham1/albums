@@ -6,9 +6,7 @@ from flask import (
     request
 )
 from flask_sqlalchemy import SQLAlchemy
-
 from albums.config import Config, TestConfig
-from .routes import albums, users
 
 
 app = Flask(__name__)
@@ -19,7 +17,7 @@ else:
 
 db = SQLAlchemy(app=app)
 
-
+from .routes import albums, users
 app.register_blueprint(albums.blueprint)
 app.register_blueprint(users.blueprint)
 

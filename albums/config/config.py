@@ -2,9 +2,9 @@ import os
 
 
 POSTGRES_URL = os.environ.get('POSTGRES_URL', 'localhost')
-POSTGRES_USER = os.environ.get('POSTGRES_USER', 'user')
+POSTGRES_USER = os.environ.get('POSTGRES_USER', 'postgres')
 POSTGRES_PW = os.environ.get('POSTGRES_PW', 'password')
-POSTGRES_DB = os.environ.get('POSTGRES_DB', 'test_db')
+POSTGRES_DB = os.environ.get('POSTGRES_DB', 'dev')
 JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY', 'test_secret_key')
 
 class Config:
