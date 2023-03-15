@@ -3,8 +3,8 @@
 The Albums REST API is an application written in Python that allows you to perform basic CRUD operations on Album objects. 
 
 ## Features
-- Unit testing with Python's unittest library, which allowed me to Mock/Patch
-- PostgreSQL was used for storing the data for Albums, Genres, and Artists
+- Unit testing with Python's unittest library, which allowed for Mocking/Patching
+- PostgreSQL was used for storing Albums, Genres, and Artists data
 - Sorting, Filtering, and Ordering have been implemented
 - Data validation/serialization using Python's Marshmallow library
 - Token-based authentication has been applied to the Create, Update and Delete Album endpoints
@@ -25,7 +25,7 @@ The Albums REST API is an application written in Python that allows you to perfo
 
 ## Running Unit tests
  - To run unit tests from inside the container, SSH into the albums container with `docker exec -it albums /bin/bash`
- - Once inside, from the `weecare` directory, run the Shell Script responsible for running Unit tests: `sh albums/tests/unit/run_unit_tests.sh`
+ - Once inside, from the `weecare` directory, run `sh albums/tests/unit/run_unit_tests.sh`
 
 ## Postman Collection
 - The Albums API have been exported as a Postman Collection for your convenience 😬 The Collection also has docs on how the API works, but in case you don't use Postman, see the Endpoints section below.
@@ -35,7 +35,9 @@ The Albums REST API is an application written in Python that allows you to perfo
 ### Health Check
 #### Request
 `GET /health`
-`curl -i -H 'Accept: application/json' http://127.0.0.1:80/health`
+```
+curl -i -H 'Accept: application/json' http://127.0.0.1:80/health
+```
 #### Response
 ```
 HTTP/1.1 200 OK
@@ -47,27 +49,37 @@ Connection: close
 
 "The Albums server is up and running. Awesome!"
 ```
+<br/>
 
 
 ### User Creation
 #### Request
 `POST /api/users/register`
-`curl --location --request POST 'http://127.0.0.1:80/api/users/register' --header 'Content-Type: application/json' --data-raw '{"username": "test_user", "password": "test_password"}'`
+```
+curl --location --request POST 'http://127.0.0.1:80/api/users/register' --header 'Content-Type: application/json' --data-raw '{"username": "test_user", "password": "test_password"}'
+```
 #### Response
 `User successfully created`
+<br/>
 
 
 ### User Login
 #### Request
 `POST /api/users/login`
-`curl --location --request POST 'http://127.0.0.1:80/api/users/login' --header 'Authorization: Basic dGVzdF91c2VyOnRlc3RfcGFzc3dvcmQ='`
+```
+curl --location --request POST 'http://127.0.0.1:80/api/users/login' --header 'Authorization: Basic dGVzdF91c2VyOnRlc3RfcGFzc3dvcmQ='
+```
 #### Response
 `{"Token":"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}`
+<br/>
+
 
 ### Get Albums
 #### Request
 `GET /api/albums/`
-`curl --location --request GET 'http://127.0.0.1:80/api/albums/?sort_by=album_id&order_by=asc'`
+```
+curl --location --request GET 'http://127.0.0.1:80/api/albums/?sort_by=album_id&order_by=asc'
+```
 #### Response
 ```
 [
@@ -96,6 +108,8 @@ Connection: close
     ...
 ]
 ```
+<br/>
+
 
 ### Create Album
 #### Request
@@ -145,6 +159,8 @@ curl --location --request POST 'http://127.0.0.1:80/api/albums/' \
     "url": "https://music.apple.com/us/album/red-taylors-version-a-message-from-taylor/1590368448"
 }
 ```
+<br/>
+
 
 ### Update Album
 #### Request
@@ -194,11 +210,15 @@ curl --location --request PUT 'http://127.0.0.1:80/api/albums/1' \
     "url": "https://music.apple.com/us/album/red-taylors-version-a-message-from-taylor/1590368448"
 }
 ```
+<br/>
+
 
 ### Delete Album
 #### Request
 `DELETE /api/albums{album_id}`
-`curl --location --request DELETE 'http://127.0.0.1:80/api/albums/2' --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjc4ODU3MDA1fQ.iFvwGGg79rjFqUlkIvMDEwwXVxm67uSaq-62hCK6r1Y'`
-
+```
+curl --location --request DELETE 'http://127.0.0.1:80/api/albums/2' --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjc4ODU3MDA1fQ.iFvwGGg79rjFqUlkIvMDEwwXVxm67uSaq-62hCK6r1Y'
+```
 ### Response
 `"Successfully deleted Album with ID 2"`
+<br/>
