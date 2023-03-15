@@ -15,7 +15,7 @@ class UserTestCase(unittest.TestCase):
 
         # Create a test client for the app
         self.client = app.test_client()
-        
+
     def tearDown(self):
         # Pop the Flask app context
         self.app_context.pop()
@@ -25,49 +25,83 @@ class UserTestCase(unittest.TestCase):
         patch_db.commit.return_value = None
 
         # create a test user
-        user_data = {'username': 'test_user', 'password': 'test_password'}
-        response = self.client.post('/api/users/register', data=json.dumps(user_data), content_type='application/json')
+        user_data = {"username": "test_user", "password": "test_password"}
+        response = self.client.post(
+            "/api/users/register",
+            data=json.dumps(user_data),
+            content_type="application/json",
+        )
 
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.json, 'User successfully created')
+        self.assertEquals(response.json, "User successfully created")
 
-        patch_db.add.assert_called_once_with(Users(username='test_user', password=ANY, created_at=ANY, updated_at=ANY))
-    
+        patch_db.add.assert_called_once_with(
+            Users(username="test_user", password=ANY, created_at=ANY, updated_at=ANY)
+        )
+
     @patch("albums.routes.users.db.session")
     def test_register_fail(self, patch_db):
-        patch_db.add.side_effect = IntegrityError('IntegrityError', {}, 'Duplicate Entry')
+        patch_db.add.side_effect = IntegrityError(
+            "IntegrityError", {}, "Duplicate Entry"
+        )
 
         # create a test user
-        user_data = {'username': 'test_user', 'password': 'test_password'}
-        response = self.client.post('/api/users/register', data=json.dumps(user_data), content_type='application/json')
+        user_data = {"username": "test_user", "password": "test_password"}
+        response = self.client.post(
+            "/api/users/register",
+            data=json.dumps(user_data),
+            content_type="application/json",
+        )
 
         self.assertEquals(response.status_code, 400)
-        self.assertEquals(response.json, 'Username already exists')
+        self.assertEquals(response.json, "Username already exists")
 
     @patch("albums.routes.users.jwt.encode")
     @patch("albums.routes.users.check_password_hash")
     @patch("albums.routes.users.Users")
     def test_login_success(self, patch_users, patch_password_hash, patch_jwt_encode):
-        patch_users.query.filter_by.return_value.first.return_value = Users(id=ANY, username='admin', password=ANY, created_at=ANY, updated_at=ANY)
+        patch_users.query.filter_by.return_value.first.return_value = Users(
+            id=ANY, username="admin", password=ANY, created_at=ANY, updated_at=ANY
+        )
         patch_password_hash.return_value = True
         patch_jwt_encode.return_value = "test_token"
 
         # log in with a test user
-        auth = {'username': 'admin', 'password': 'password'}
-        response = self.client.post('/api/users/login', headers={'Authorization': 'Basic ' + base64.b64encode(f"{auth['username']}:{auth['password']}".encode('utf-8')).decode('utf-8')})
+        auth = {"username": "admin", "password": "password"}
+        response = self.client.post(
+            "/api/users/login",
+            headers={
+                "Authorization": "Basic "
+                + base64.b64encode(
+                    f"{auth['username']}:{auth['password']}".encode("utf-8")
+                ).decode("utf-8")
+            },
+        )
 
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.json, {'Token': "test_token"})
-    
+        self.assertEquals(response.json, {"Token": "test_token"})
+
     @patch("albums.routes.users.check_password_hash")
     @patch("albums.routes.users.Users")
     def test_login_fail(self, patch_users, patch_password_hash):
-        patch_users.query.filter_by.return_value.first.return_value = Users(id=ANY, username='admin', password=ANY, created_at=ANY, updated_at=ANY)
+        patch_users.query.filter_by.return_value.first.return_value = Users(
+            id=ANY, username="admin", password=ANY, created_at=ANY, updated_at=ANY
+        )
         patch_password_hash.return_value = False
 
-         # log in with a test user
-        auth = {'username': 'admin', 'password': 'password'}
-        response = self.client.post('/api/users/login', headers={'Authorization': 'Basic ' + base64.b64encode(f"{auth['username']}:{auth['password']}".encode('utf-8')).decode('utf-8')})
+        # log in with a test user
+        auth = {"username": "admin", "password": "password"}
+        response = self.client.post(
+            "/api/users/login",
+            headers={
+                "Authorization": "Basic "
+                + base64.b64encode(
+                    f"{auth['username']}:{auth['password']}".encode("utf-8")
+                ).decode("utf-8")
+            },
+        )
 
         self.assertEquals(response.status_code, 401)
-        self.assertEquals(response.json,'Could not authenticate the User with the given credentials')
+        self.assertEquals(
+            response.json, "Could not authenticate the User with the given credentials"
+        )

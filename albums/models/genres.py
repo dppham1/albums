@@ -13,9 +13,10 @@ class Genres(db.Model):
     updated_at: datetime
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50), nullable=False) 
+    name = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
+
 
 class GenreSchema(Schema):
     id = fields.Int(dump_only=True)

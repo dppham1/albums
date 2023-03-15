@@ -19,6 +19,7 @@ class Users(db.Model):
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
 
+
 class UserSchema(Schema):
     id = fields.Int(dump_only=True)
     username = fields.Str(required=True, allow_none=False)

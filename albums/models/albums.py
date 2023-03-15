@@ -22,7 +22,7 @@ class Albums(db.Model):
     updated_at: datetime
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50), nullable=False) 
+    name = db.Column(db.String(50), nullable=False)
     images = db.Column(db.Text)
     song_count = db.Column(db.Integer)
     price = db.Column(db.JSON)
@@ -35,17 +35,26 @@ class Albums(db.Model):
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
 
+
 class PriceField(fields.Field):
     """
     Custom Validator for "price" field of Albums object
     """
+
     def _deserialize(self, value, attr, data, **kwargs):
-        if isinstance(value.get('amount'), int) or isinstance(value.get('amount'), float) and isinstance(value.get('currency'), str):
+        if (
+            isinstance(value.get("amount"), int)
+            or isinstance(value.get("amount"), float)
+            and isinstance(value.get("currency"), str)
+        ):
             return value
         else:
-            raise ValidationError("Price object's 'amount' field should be an int or double and 'currency' field should be a str")
+            raise ValidationError(
+                "Price object's 'amount' field should be an int or double and 'currency' field should be a str"
+            )
 
-class AlbumSchema(Schema):  
+
+class AlbumSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str(required=True, allow_none=False)
     images = fields.List(fields.String(), required=True, allow_none=False)
