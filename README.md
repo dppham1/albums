@@ -28,7 +28,7 @@ The Albums REST API is an application written in Python that allows you to perfo
  - Once inside, from the `weecare` directory, run `sh albums/tests/unit/run_unit_tests.sh`
 
 ## Postman Collection
-- The Albums API have been exported as a Postman Collection for your convenience 😬 The Collection also has docs on how the API works, but in case you don't use Postman, see the Endpoints section below.
+- The Albums API has been exported as a Postman Collection for your convenience 😬 The Collection also has docs on how the API works, but in case you don't use Postman, see the Endpoints section below.
 
 ## Endpoints
 
@@ -222,3 +222,5 @@ curl --location --request DELETE 'http://127.0.0.1:80/api/albums/2' --header 'Au
 ### Response
 `"Successfully deleted Album with ID 2"`
 <br/>
+<br/>
+✌️
