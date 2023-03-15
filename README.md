@@ -8,11 +8,11 @@ The Albums REST API is an application written in Python that allows you to perfo
 - Sorting, Filtering, and Ordering have been implemented
 - Data validation/serialization using Python's Marshmallow library
 - Token-based authentication has been applied to the Create, Update and Delete Album endpoints
-- The application has been dockerized with Docker v20.10.23 and Docker Compose v2.15.1. Feel free to try it on your machine, and hollar me if there are any questions 😊
+- The application has been dockerized with Docker v20.10.23 and Docker Compose v2.15.1. Feel free to try it on your machine, and holler me if there are any questions 😊
 
 ## Requirements
-- Docker v20.10.23
-- Docker Compose v2.15.1
+- Docker v20.10.23 (latest should be fine)
+- Docker Compose v2.15.1 (latest should be fine)
 
 ## Install
 - `mkdir weecare`

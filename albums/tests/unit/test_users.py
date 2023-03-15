@@ -32,8 +32,8 @@ class UserTestCase(unittest.TestCase):
             content_type="application/json",
         )
 
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.json, "User successfully created")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json, "User successfully created")
 
         patch_db.add.assert_called_once_with(
             Users(username="test_user", password=ANY, created_at=ANY, updated_at=ANY)
@@ -53,8 +53,8 @@ class UserTestCase(unittest.TestCase):
             content_type="application/json",
         )
 
-        self.assertEquals(response.status_code, 400)
-        self.assertEquals(response.json, "Username already exists")
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json, "Username already exists")
 
     @patch("albums.routes.users.jwt.encode")
     @patch("albums.routes.users.check_password_hash")
@@ -78,8 +78,8 @@ class UserTestCase(unittest.TestCase):
             },
         )
 
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.json, {"Token": "test_token"})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json, {"Token": "test_token"})
 
     @patch("albums.routes.users.check_password_hash")
     @patch("albums.routes.users.Users")
@@ -101,7 +101,7 @@ class UserTestCase(unittest.TestCase):
             },
         )
 
-        self.assertEquals(response.status_code, 401)
-        self.assertEquals(
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(
             response.json, "Could not authenticate the User with the given credentials"
         )
