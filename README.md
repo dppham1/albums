@@ -5,7 +5,7 @@ The Albums REST API is an application written in Python that allows you to perfo
 ## Features
 - Unit testing with Python's unittest library, which allowed for Mocking/Patching
 - PostgreSQL was used for storing Albums, Genres, and Artists data
-- Sorting, Filtering, and Ordering have been implemented
+- Sorting, Filtering, Ordering and Pagination have been implemented
 - Data validation/serialization using Python's Marshmallow library
 - Token-based authentication has been applied to the Create, Update and Delete Album endpoints
 - The application has been dockerized with Docker v20.10.23 and Docker Compose v2.15.1. Feel free to try it on your machine, and holler me if there are any questions 😊
