@@ -81,7 +81,7 @@ curl --location --request POST 'http://127.0.0.1:80/api/users/login' --header 'A
 ### Request
 `DELETE /api/users`
 ```
-curl --location --request DELETE 'http://127.0.0.1:5000/api/users/1'
+curl --location --request DELETE 'http://127.0.0.1:80/api/users/1'
 ```
 ### Response
 `{"status": "Successfully deleted User with ID 1"}`
