@@ -2,10 +2,8 @@
 
 export ENV='test'
 
-printf "Running unit tests for Users"
+printf "Running unit tests for Users\n"
 python3 -m unittest albums/tests/unit/test_users.py
 
-printf "\n"
-
-printf "Running unit tests for Albums"
+printf "Running unit tests for Albums\n"
 python3 -m unittest albums/tests/unit/test_albums.py

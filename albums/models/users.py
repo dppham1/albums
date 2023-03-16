@@ -14,8 +14,8 @@ class Users(db.Model):
     updated_at: datetime
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String(50))
-    password = db.Column(db.String(50))
+    username = db.Column(db.String(256))
+    password = db.Column(db.String(256))
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
 

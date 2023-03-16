@@ -18,11 +18,12 @@ blueprint = Blueprint("users", __name__, url_prefix="/api/users")
 @blueprint.route("/register", methods=["POST"])
 def register():
     data = request.json
-    username = data.get("username").lower()
+    username = data.get("username")
     password = data.get("password")
     if not username or not password:
         return jsonify("A Username and Password is required to register"), 400
 
+    username = username.lower()
     hashed_password = generate_password_hash(password, method="sha256")
 
     try:
@@ -42,7 +43,7 @@ def register():
         db.session.rollback()
         return jsonify("Username already exists"), 400
 
-    return jsonify("User successfully created"), 200
+    return jsonify({"status": "User successfully created", "user_id": new_user.id}), 200
 
 
 @blueprint.route("/login", methods=["POST"])
@@ -61,3 +62,19 @@ def login():
         return jsonify({"Token": token}), 200
 
     return jsonify("Could not authenticate the User with the given credentials"), 401
+
+
+@blueprint.route("/<int:user_id>", methods=["DELETE"])
+def delete(user_id):
+    if request.method == "DELETE":
+        user_record = Users.query.filter_by(id=user_id).first()
+        if user_record:
+            try:
+                db.session.delete(user_record)
+                db.session.commit()
+            except Exception as e:
+                return jsonify(e.messages), 400
+
+            return jsonify(f"Successfully deleted User with ID {user_id}"), 200
+        else:
+            return jsonify(f"User with ID {user_id} not found"), 404

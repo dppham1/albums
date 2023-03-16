@@ -33,7 +33,7 @@ class UserTestCase(unittest.TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json, "User successfully created")
+        self.assertEqual(response.json["status"], "User successfully created")
 
         patch_db.add.assert_called_once_with(
             Users(username="test_user", password=ANY, created_at=ANY, updated_at=ANY)
@@ -105,3 +105,27 @@ class UserTestCase(unittest.TestCase):
         self.assertEqual(
             response.json, "Could not authenticate the User with the given credentials"
         )
+
+    @patch("albums.routes.users.db.session")
+    @patch("albums.routes.users.Users")
+    def test_delete_success(self, patch_users, patch_db):
+        user_id = 1
+        patch_users.query.filter_by.return_value.first.return_value = Users(
+            id=user_id, username="admin", password=ANY, created_at=ANY, updated_at=ANY
+        )
+        patch_db.commit.return_value = None
+
+        response = self.client.delete(f"/api/users/{user_id}")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json, f"Successfully deleted User with ID {user_id}")
+
+    @patch("albums.routes.users.db.session")
+    @patch("albums.routes.users.Users")
+    def test_delete_fail(self, patch_users, patch_db):
+        user_id = 1
+        patch_users.query.filter_by.return_value.first.return_value = None
+
+        response = self.client.delete(f"/api/users/{user_id}")
+
+        self.assertEqual(response.json, f"User with ID {user_id} not found")

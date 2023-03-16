@@ -33,13 +33,21 @@ def get_albums():
             sort_column = sort_column.desc()
         else:
             sort_column = sort_column.asc()
-        
+
         # pagination
-        page = int(request.args.get("page")) if (request.args.get("page") and request.args.get("page").isdigit()) else 1
+        page = (
+            int(request.args.get("page"))
+            if (request.args.get("page") and request.args.get("page").isdigit())
+            else 1
+        )
         per_page = 5
 
         # find records
-        albums = Albums.query.filter_by(**filters).order_by(sort_column).paginate(page=page, per_page=per_page, error_out=False)
+        albums = (
+            Albums.query.filter_by(**filters)
+            .order_by(sort_column)
+            .paginate(page=page, per_page=per_page, error_out=False)
+        )
         response_data = AlbumSchema(many=True).dump(albums)
 
         return jsonify(response_data), 200

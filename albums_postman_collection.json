@@ -47,13 +47,13 @@
 					"type": "basic",
 					"basic": [
 						{
-							"key": "password",
-							"value": "test_password",
+							"key": "username",
+							"value": "test_user",
 							"type": "string"
 						},
 						{
-							"key": "username",
-							"value": "test_user",
+							"key": "password",
+							"value": "test_password",
 							"type": "string"
 						}
 					]
@@ -83,7 +83,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/api/albums/?sort_by=album_id&order_by=asc",
+					"raw": "http://{{host}}:{{port}}/api/albums/?name=reputation&page=1&sort_by=name&order_by=desc",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -96,16 +96,24 @@
 					],
 					"query": [
 						{
+							"key": "name",
+							"value": "reputation"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
 							"key": "sort_by",
-							"value": "album_id"
+							"value": "name"
 						},
 						{
 							"key": "order_by",
-							"value": "asc"
+							"value": "desc"
 						}
 					]
 				},
-				"description": "<h2>Gets all albums</h2>\n\n<i>Note: Filtering, Sorting, and Ordering are all supported. Just add the sort_by and order_by query params!</i>"
+				"description": "<h2>Gets all albums</h2>\n\n<i>Note: Filtering, Sorting, and Ordering are all supported. \n<li>Filtering is supported on the following fields: <b>name, genre_id, artist_id</b>. \n<li>For sorting, add the <b>sort_by</b> query param.\n<li> For ordering, add the <b>order_by</b> query param!</i>"
 			},
 			"response": []
 		},
@@ -187,7 +195,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Test Album2\",\n    \"images\": [\n        \"https://images.saymedia-content.com/.image/t_share/MTc0NDkxNzgyMzYzNDg5NjQw/vinyl-to-paper-how-to-write-an-album-review.jpg\"\n    ],\n    \"song_count\": 5,\n    \"price\": {\n        \"amount\": 5.99,\n        \"currency\": \"USD\"\n    },\n    \"label_rights\": \"Sony Music Entertainment\",\n    \"title\": \"Album Title\",\n    \"url\": \"https://music.apple.com/us/album/red-taylors-version-a-message-from-taylor/1590368448\",\n    \"artist_id\": 159260351,\n    \"genre_id\": 14,\n    \"release_date\": \"2023-02-14 00:00:00\"\n}",
+					"raw": "{\n    \"name\": \"Test Album\",\n    \"images\": [\n        \"https://images.saymedia-content.com/.image/t_share/MTc0NDkxNzgyMzYzNDg5NjQw/vinyl-to-paper-how-to-write-an-album-review.jpg\"\n    ],\n    \"song_count\": 5,\n    \"price\": {\n        \"amount\": 5.99,\n        \"currency\": \"USD\"\n    },\n    \"label_rights\": \"Sony Music Entertainment\",\n    \"title\": \"Album Title\",\n    \"url\": \"https://music.apple.com/us/album/red-taylors-version-a-message-from-taylor/1590368448\",\n    \"artist_id\": 159260351,\n    \"genre_id\": 14,\n    \"release_date\": \"2023-02-14 00:00:00\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -195,7 +203,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/api/albums/1",
+					"raw": "http://{{host}}:{{port}}/api/albums/2",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -204,7 +212,7 @@
 					"path": [
 						"api",
 						"albums",
-						"1"
+						"2"
 					]
 				},
 				"description": "<h2>Updates an Album</h2>\n\n**Endpoint authentication exists for this endpoint, which means you will require a valid Token to call this endpoint.**\n\n<h2>Request Body Params</h2>\n<div>- <b>name (str)</b>: Album name</div>\n<div>- <b>images (List[str])</b>: Album's images</div>\n<div>- <b>song_count (int)</b>: The number of songs in the Album</div>\n<div>- <b>price (dict)</b>: A dict consisting of two keys, 'price' and 'amount' that indicates the price of the album and in which currency</div>\n<div>- <b>label_rights (str)</b>: The Record Label </div>\n<div>- <b>title (str)</b>: The Album's Title</div>\n<div>- <b>url (str)</b>: The URL for where the Album exists on Apple</div>\n<div>- <b>artist_id (int)</b>: The ID of the Album's Artist </div>\n<div>- <b>genre_id (int)</b>: The ID of the Album's genre</div>\n<div> - <b>release_date (str)</b>: The Album's release date </div>"
@@ -227,7 +235,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/api/albums/1",
+					"raw": "http://{{host}}:{{port}}/api/albums/2",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -236,7 +244,7 @@
 					"path": [
 						"api",
 						"albums",
-						"1"
+						"2"
 					]
 				},
 				"description": "<h2>Deletes an Album</h2>\n\n**Endpoint authentication exists for this endpoint, which means you will require a valid Token to call this endpoint.**"

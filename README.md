@@ -3,9 +3,9 @@
 The Albums REST API is an application written in Python that allows you to perform basic CRUD operations on Album objects. 
 
 ## Features
-- Unit testing with Python's unittest library, which allowed for Mocking/Patching
+- Unit testing with Python's `unittest` library and Integration testing with Python's `flask_testing` library
 - PostgreSQL was used for storing Albums, Genres, and Artists data
-- Sorting, Filtering, Ordering and Pagination have been implemented
+- Sorting, Filtering (name, genre_id, artist_id), Ordering and Pagination have been implemented
 - Data validation/serialization using Python's Marshmallow library
 - Token-based authentication has been applied to the Create, Update and Delete Album endpoints
 - The application has been dockerized with Docker v20.10.23 and Docker Compose v2.15.1. Feel free to try it on your machine, and holler me if there are any questions 😊
@@ -59,7 +59,7 @@ Connection: close
 curl --location --request POST 'http://127.0.0.1:80/api/users/register' --header 'Content-Type: application/json' --data-raw '{"username": "test_user", "password": "test_password"}'
 ```
 #### Response
-`User successfully created`
+`{"status": "User successfully created", "user_id": 1}`
 <br/>
 
 
@@ -71,6 +71,16 @@ curl --location --request POST 'http://127.0.0.1:80/api/users/login' --header 'A
 ```
 #### Response
 `{"Token":"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}`
+<br/>
+
+### User Deletion
+### Request
+`DELETE /api/users`
+```
+curl --location --request DELETE 'http://127.0.0.1:5000/api/users/1'
+```
+### Response
+`"Successfully deleted User with ID 1"`
 <br/>
 
 
