@@ -78,6 +78,28 @@
 			"response": []
 		},
 		{
+			"name": "Users - Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/api/users/1",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				},
+				"description": "<h2>User Deletion</h2>"
+			},
+			"response": []
+		},
+		{
 			"name": "Albums - Get Albums",
 			"request": {
 				"method": "GET",
@@ -145,7 +167,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjc4ODU3MDA1fQ.iFvwGGg79rjFqUlkIvMDEwwXVxm67uSaq-62hCK6r1Y",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNjc4OTIwNDIxfQ.XUwE95ZE26qBbUBHEjrz90f1SmKbfyvKw7Fi5bA6KKg",
 							"type": "string"
 						}
 					]
@@ -186,7 +208,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjc4ODU3MDA1fQ.iFvwGGg79rjFqUlkIvMDEwwXVxm67uSaq-62hCK6r1Y",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNjc4OTIwNDIxfQ.XUwE95ZE26qBbUBHEjrz90f1SmKbfyvKw7Fi5bA6KKg",
 							"type": "string"
 						}
 					]
@@ -203,7 +225,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/api/albums/2",
+					"raw": "http://{{host}}:{{port}}/api/albums/1",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -212,7 +234,7 @@
 					"path": [
 						"api",
 						"albums",
-						"2"
+						"1"
 					]
 				},
 				"description": "<h2>Updates an Album</h2>\n\n**Endpoint authentication exists for this endpoint, which means you will require a valid Token to call this endpoint.**\n\n<h2>Request Body Params</h2>\n<div>- <b>name (str)</b>: Album name</div>\n<div>- <b>images (List[str])</b>: Album's images</div>\n<div>- <b>song_count (int)</b>: The number of songs in the Album</div>\n<div>- <b>price (dict)</b>: A dict consisting of two keys, 'price' and 'amount' that indicates the price of the album and in which currency</div>\n<div>- <b>label_rights (str)</b>: The Record Label </div>\n<div>- <b>title (str)</b>: The Album's Title</div>\n<div>- <b>url (str)</b>: The URL for where the Album exists on Apple</div>\n<div>- <b>artist_id (int)</b>: The ID of the Album's Artist </div>\n<div>- <b>genre_id (int)</b>: The ID of the Album's genre</div>\n<div> - <b>release_date (str)</b>: The Album's release date </div>"
@@ -227,7 +249,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjc4ODU3MDA1fQ.iFvwGGg79rjFqUlkIvMDEwwXVxm67uSaq-62hCK6r1Y",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNjc4OTIwNDIxfQ.XUwE95ZE26qBbUBHEjrz90f1SmKbfyvKw7Fi5bA6KKg",
 							"type": "string"
 						}
 					]
@@ -235,7 +257,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/api/albums/2",
+					"raw": "http://{{host}}:{{port}}/api/albums/1",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -244,7 +266,7 @@
 					"path": [
 						"api",
 						"albums",
-						"2"
+						"1"
 					]
 				},
 				"description": "<h2>Deletes an Album</h2>\n\n**Endpoint authentication exists for this endpoint, which means you will require a valid Token to call this endpoint.**"
