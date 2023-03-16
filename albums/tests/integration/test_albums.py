@@ -223,7 +223,9 @@ class UpdateAlbumTest(BaseTestCase):
         )
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json, f"Album with ID {invalid_album_id} not found")
+        self.assertEqual(
+            response.json, {"status": f"Album with ID {invalid_album_id} not found"}
+        )
 
         # Cleanup
         self.client.delete(f"/api/users/{user_id}")
@@ -274,7 +276,7 @@ class DeleteAlbumTest(BaseTestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            response.json, f"Successfully deleted Album with ID {album_id}"
+            response.json, {"status": f"Successfully deleted Album with ID {album_id}"}
         )
 
     def test_delete_album_fail(self):
@@ -297,4 +299,4 @@ class DeleteAlbumTest(BaseTestCase):
         self.client.delete(f"/api/users/{user_id}")
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json, f"Album with ID {invalid_album_id} not found")
+        self.assertEqual(response.json, {"status": f"Album with ID {invalid_album_id} not found"})

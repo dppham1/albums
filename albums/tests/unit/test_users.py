@@ -54,7 +54,7 @@ class UserTestCase(unittest.TestCase):
         )
 
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json, "Username already exists")
+        self.assertEqual(response.json, {"status": "Username already exists"})
 
     @patch("albums.routes.users.jwt.encode")
     @patch("albums.routes.users.check_password_hash")
@@ -103,7 +103,8 @@ class UserTestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 401)
         self.assertEqual(
-            response.json, "Could not authenticate the User with the given credentials"
+            response.json,
+            {"status": "Could not authenticate the User with the given credentials"},
         )
 
     @patch("albums.routes.users.db.session")
@@ -118,7 +119,9 @@ class UserTestCase(unittest.TestCase):
         response = self.client.delete(f"/api/users/{user_id}")
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json, f"Successfully deleted User with ID {user_id}")
+        self.assertEqual(
+            response.json, {"status": f"Successfully deleted User with ID {user_id}"}
+        )
 
     @patch("albums.routes.users.db.session")
     @patch("albums.routes.users.Users")
@@ -128,4 +131,4 @@ class UserTestCase(unittest.TestCase):
 
         response = self.client.delete(f"/api/users/{user_id}")
 
-        self.assertEqual(response.json, f"User with ID {user_id} not found")
+        self.assertEqual(response.json, {"status": f"User with ID {user_id} not found"})

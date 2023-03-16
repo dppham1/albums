@@ -73,7 +73,7 @@ def update_album(album_id):
             response_data = album_schema.dump(album_record)
             return jsonify(response_data), 200
         else:
-            return jsonify(f"Album with ID {album_id} not found"), 404
+            return jsonify({"status": f"Album with ID {album_id} not found"}), 404
 
 
 @blueprint.route("/", methods=["POST"])
@@ -114,6 +114,9 @@ def delete_album(album_id):
             except Exception as e:
                 return jsonify(e.messages), 400
 
-            return jsonify(f"Successfully deleted Album with ID {album_id}"), 200
+            return (
+                jsonify({"status": f"Successfully deleted Album with ID {album_id}"}),
+                200,
+            )
         else:
-            return jsonify(f"Album with ID {album_id} not found"), 404
+            return jsonify({"status": f"Album with ID {album_id} not found"}), 404

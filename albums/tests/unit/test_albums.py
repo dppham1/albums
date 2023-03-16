@@ -253,7 +253,9 @@ class UserTestCase(unittest.TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json, "Successfully deleted Album with ID 1")
+        self.assertEqual(
+            response.json, {"status": "Successfully deleted Album with ID 1"}
+        )
 
     @patch("albums.routes.albums.Albums")
     @patch("albums.auth.Users")
@@ -273,4 +275,4 @@ class UserTestCase(unittest.TestCase):
         )
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json, "Album with ID 1 not found")
+        self.assertEqual(response.json, {"status": "Album with ID 1 not found"})

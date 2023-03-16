@@ -21,7 +21,10 @@ def register():
     username = data.get("username")
     password = data.get("password")
     if not username or not password:
-        return jsonify("A Username and Password is required to register"), 400
+        return (
+            jsonify({"status": "A Username and Password is required to register"}),
+            400,
+        )
 
     username = username.lower()
     hashed_password = generate_password_hash(password, method="sha256")
@@ -41,7 +44,7 @@ def register():
         db.session.commit()
     except IntegrityError as e:
         db.session.rollback()
-        return jsonify("Username already exists"), 400
+        return jsonify({"status": "Username already exists"}), 400
 
     return jsonify({"status": "User successfully created", "user_id": new_user.id}), 200
 
@@ -54,14 +57,19 @@ def login():
 
     user = Users.query.filter_by(username=auth.username.lower()).first()
     if not user:
-        return jsonify("User does not exist"), 400
+        return jsonify({"status": "User does not exist"}), 400
 
     if check_password_hash(user.password, auth.password):
         payload = {"id": user.id, "exp": datetime.utcnow() + timedelta(minutes=120)}
         token = jwt.encode(payload, JWT_SECRET_KEY, algorithm="HS256")
         return jsonify({"Token": token}), 200
 
-    return jsonify("Could not authenticate the User with the given credentials"), 401
+    return (
+        jsonify(
+            {"status": "Could not authenticate the User with the given credentials"}
+        ),
+        401,
+    )
 
 
 @blueprint.route("/<int:user_id>", methods=["DELETE"])
@@ -75,6 +83,9 @@ def delete(user_id):
             except Exception as e:
                 return jsonify(e.messages), 400
 
-            return jsonify(f"Successfully deleted User with ID {user_id}"), 200
+            return (
+                jsonify({"status": f"Successfully deleted User with ID {user_id}"}),
+                200,
+            )
         else:
-            return jsonify(f"User with ID {user_id} not found"), 404
+            return jsonify({"status": f"User with ID {user_id} not found"}), 404

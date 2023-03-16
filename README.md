@@ -84,7 +84,7 @@ curl --location --request POST 'http://127.0.0.1:80/api/users/login' --header 'A
 curl --location --request DELETE 'http://127.0.0.1:5000/api/users/1'
 ```
 ### Response
-`"Successfully deleted User with ID 1"`
+`{"status": "Successfully deleted User with ID 1"}`
 <br/>
 
 
@@ -234,7 +234,7 @@ curl --location --request PUT 'http://127.0.0.1:80/api/albums/1' \
 curl --location --request DELETE 'http://127.0.0.1:80/api/albums/2' --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZXhwIjoxNjc4ODU3MDA1fQ.iFvwGGg79rjFqUlkIvMDEwwXVxm67uSaq-62hCK6r1Y'
 ```
 ### Response
-`"Successfully deleted Album with ID 2"`
+`{"status": "Successfully deleted Album with ID 2"}`
 <br/>
 <br/>
 ✌️

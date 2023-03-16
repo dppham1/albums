@@ -35,7 +35,8 @@ class UserRegisterTest(BaseTestCase):
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.get_json(), "A Username and Password is required to register"
+            response.get_json(),
+            {"status": "A Username and Password is required to register"},
         )
 
         # Check if the new User was not added to the database
