@@ -75,7 +75,7 @@ class CreateAlbumTest(BaseTestCase):
 
         # Check that the Request failed due to a missing Token
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json, "A valid Token is required")
+        self.assertEqual(response.json, {"status": "A valid Token is required"})
 
 
 class GetAlbumsTest(BaseTestCase):
@@ -299,4 +299,6 @@ class DeleteAlbumTest(BaseTestCase):
         self.client.delete(f"/api/users/{user_id}")
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json, {"status": f"Album with ID {invalid_album_id} not found"})
+        self.assertEqual(
+            response.json, {"status": f"Album with ID {invalid_album_id} not found"}
+        )

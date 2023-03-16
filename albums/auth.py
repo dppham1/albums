@@ -15,9 +15,9 @@ def token_required(f):
             try:
                 token = request.headers["Authorization"].split("Bearer ")[1].strip()
             except IndexError:
-                return jsonify("A valid Token is required"), 400
+                return jsonify({"status": "A valid Token is required"}), 400
         if not token:
-            return jsonify("A valid Token is required"), 400
+            return jsonify({"status": "A valid Token is required"}), 400
 
         try:
             data = jwt.decode(token, JWT_SECRET_KEY, algorithms=["HS256"])
@@ -25,11 +25,11 @@ def token_required(f):
             if (
                 not current_user
             ):  # edge case where User used to exist but was deleted. In this case, we should invalidate the Token
-                return jsonify("User not found"), 400
+                return jsonify({"status": "User not found"}), 400
         except jwt.exceptions.InvalidSignatureError:
-            return jsonify("Token is invalid"), 400
+            return jsonify({"status": "Token is invalid"}), 400
         except jwt.exceptions.ExpiredSignatureError:
-            return jsonify("Token is expired"), 400
+            return jsonify({"status": "Token is expired"}), 400
 
         return f(*args, **kwargs)
 

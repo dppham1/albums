@@ -1,6 +1,6 @@
 import os
 
-
+# ideally, these should be stored in something like Vault
 POSTGRES_URL = os.environ.get("POSTGRES_URL", "localhost")
 POSTGRES_USER = os.environ.get("POSTGRES_USER", "postgres")
 POSTGRES_PW = os.environ.get("POSTGRES_PW", "password")

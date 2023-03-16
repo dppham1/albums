@@ -53,7 +53,7 @@ def register():
 def login():
     auth = request.authorization
     if not auth or not auth.username or not auth.password:
-        return jsonify("A Username and Password is required to login"), 401
+        return jsonify({"status": "A Username and Password is required to login"}), 401
 
     user = Users.query.filter_by(username=auth.username.lower()).first()
     if not user:
