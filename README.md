@@ -5,8 +5,8 @@ The Albums REST API is an application written in Python that allows you to perfo
 ## Features
 - Unit testing with Python's `unittest` library and Integration testing with Python's `flask_testing` library
 - PostgreSQL was used for storing Albums, Genres, and Artists data
-- Sorting, Filtering (name, genre_id, artist_id), Ordering and Pagination have been implemented
-- Data validation/serialization using Python's Marshmallow library
+- Sorting, Filtering (on the `name`, `genre_id`, `artist_id` fields), Ordering and Pagination have been implemented
+- Data validation/serialization using Python's `Marshmallow` library
 - Token-based authentication has been applied to the Create, Update and Delete Album endpoints
 - The application has been dockerized with Docker v20.10.23 and Docker Compose v2.15.1. Feel free to try it on your machine, and holler me if there are any questions 😊
 
@@ -26,6 +26,10 @@ The Albums REST API is an application written in Python that allows you to perfo
 ## Running Unit tests
  - To run unit tests from inside the container, SSH into the albums container with `docker exec -it albums /bin/bash`
  - Once inside, from the `weecare` directory, run `sh albums/tests/unit/run_unit_tests.sh`
+
+## Running Integration tests
+- To run integration tests from isnide the container, SSH into the albums container with `docker exec -it albums /bin/bash`
+- Once inside, from the `weecare` directory, run `sh albums/tests/integration/run_integration_tests.sh`
 
 ## Postman Collection
 - The Albums API has been exported as a Postman Collection for your convenience 😬 The Collection also has docs on how the API works, but in case you don't use Postman, see the Endpoints section below.

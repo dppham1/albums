@@ -16,7 +16,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"test_user\",\n    \"password\": \"test_password\"\n}",
+					"raw": "{\n    \"username\": \"david\",\n    \"password\": \"password\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -47,13 +47,13 @@
 					"type": "basic",
 					"basic": [
 						{
-							"key": "username",
-							"value": "test_user",
+							"key": "password",
+							"value": "password",
 							"type": "string"
 						},
 						{
-							"key": "password",
-							"value": "test_password",
+							"key": "username",
+							"value": "david",
 							"type": "string"
 						}
 					]
@@ -167,7 +167,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNjc4OTIwNDIxfQ.XUwE95ZE26qBbUBHEjrz90f1SmKbfyvKw7Fi5bA6KKg",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNjc4OTQ0NjY2fQ.qOkJq-UhNW5YPas9u9YDY8a-e3cnNkWJ0ZYKPCVP0NI",
 							"type": "string"
 						}
 					]
@@ -208,7 +208,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNjc4OTIwNDIxfQ.XUwE95ZE26qBbUBHEjrz90f1SmKbfyvKw7Fi5bA6KKg",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNjc4OTQ0NjY2fQ.qOkJq-UhNW5YPas9u9YDY8a-e3cnNkWJ0ZYKPCVP0NI",
 							"type": "string"
 						}
 					]
@@ -249,7 +249,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNjc4OTIwNDIxfQ.XUwE95ZE26qBbUBHEjrz90f1SmKbfyvKw7Fi5bA6KKg",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNjc4OTQ0NjY2fQ.qOkJq-UhNW5YPas9u9YDY8a-e3cnNkWJ0ZYKPCVP0NI",
 							"type": "string"
 						}
 					]
